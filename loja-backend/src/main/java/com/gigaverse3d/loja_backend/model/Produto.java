@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class Produto {
@@ -14,6 +15,7 @@ public class Produto {
     private String tipo;
     private double preco;
     private String descricao;
+    private List<String> imagens;
 
     // getters e setters
     public Long getId() {
@@ -54,5 +56,13 @@ public class Produto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public List<String> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(List<String> imagens) {
+        this.imagens = imagens;
     }
 }
