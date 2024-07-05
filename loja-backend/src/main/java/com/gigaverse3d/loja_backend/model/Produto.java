@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
 
 @Entity
 public class Produto {
@@ -15,7 +14,7 @@ public class Produto {
     private String tipo;
     private double preco;
     private String descricao;
-    private List<String> imagens;
+    private String imagemUrl;  // Adicionando o campo para a URL da imagem
 
     // getters e setters
     public Long getId() {
@@ -58,11 +57,11 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public List<String> getImagens() {
-        return imagens;
+    public String getImagemUrl() {
+        return imagemUrl;
     }
 
-    public void setImagens(List<String> imagens) {
-        this.imagens = imagens;
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
     }
 }

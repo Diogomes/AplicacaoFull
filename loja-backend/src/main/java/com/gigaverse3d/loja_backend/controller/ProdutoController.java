@@ -1,7 +1,7 @@
 package com.gigaverse3d.lojabackend.controller;
 
 import com.gigaverse3d.lojabackend.model.Produto;
-import com.gigaverse3d.lojabackend.repository.ProdutoRepository;
+import com.gigaverse3d.lojabackend.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,41 +12,15 @@ import java.util.List;
 public class ProdutoController {
 
     @Autowired
-    private ProdutoRepository produtoRepository;
-
-    @GetMapping
-    public List<Produto> getAllProdutos() {
-        return produtoRepository.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public Produto getProdutoById(@PathVariable Long id) {
-        return produtoRepository.findById(id).orElse(null);
-    }
+    private ProdutoService produtoService;
 
     @PostMapping
-    public Produto createProduto(@RequestBody Produto produto) {
-        return produtoRepository.save(produto);
+    public Produto adicionarProduto(@RequestBody Produto produto) {
+        return produtoService.salvarProduto(produto);
     }
 
-    @PutMapping("/{id}")
-    public Produto updateProduto(@PathVariable Long id, @RequestBody Produto produtoDetails) {
-        Produto produto = produtoRepository.findById(id).orElse(null);
-
-        if (produto != null) {
-            produto.setNome(produtoDetails.getNome());
-            produto.setTipo(produtoDetails.getTipo());
-            produto.setPreco(produtoDetails.getPreco());
-            produto.setDescricao(produtoDetails.getDescricao());
-            produto.setImagens(produtoDetails.getImagens());
-            return produtoRepository.save(produto);
-        }
-
-        return null;
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteProduto(@PathVariable Long id) {
-        produtoRepository.deleteById(id);
+    @GetMapping
+    public List<Produto> listarProdutos() {
+        return produtoService.listarProdutos();
     }
 }
